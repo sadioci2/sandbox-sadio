@@ -7,6 +7,7 @@ crash.*.log
 *.tfstate.*
 **/.terraform/*
 */**/.terraform
+*.tfvars
 
 # Terragrunt files and directories
 */**/.terragrunt-cache/
