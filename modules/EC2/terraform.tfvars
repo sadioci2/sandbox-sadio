@@ -5,7 +5,6 @@ key_pair = "jurist"
 
 common_tags = {
     "id"             = "2024"
-    "name"             = "blueops-ec2"
     "owner"          = "jurist"
     "environment"    = "dev"
     "project"        = "blueops"

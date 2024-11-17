@@ -10,7 +10,7 @@ cleanup_terraform() {
     fi
 
     # Directories to search
-    DIRECTORIES=("modules" "not-modules" "resources")
+    DIRECTORIES=("modules"  "resources")
 
     # Loop through each specified directory and clean up Terraform files
     for dir in "${DIRECTORIES[@]}"; do
