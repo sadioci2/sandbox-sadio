@@ -9,6 +9,6 @@ user_data = file("${path.module}/scripts/voguepay.sh")
 
   tags = merge(var.common_tags, {
     Name = format("%s-%s-%s-ec2", var.common_tags["environment"], var.common_tags["owner"], var.common_tags["project"])
-    },
+    }
   )
 }

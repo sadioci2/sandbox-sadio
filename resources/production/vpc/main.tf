@@ -1,17 +1,13 @@
-provider "aws" {
-  region = local.region
-}
-
+## Terraform block
 terraform {
   required_version = ">= 1.0.0"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 5.44.0"
     }
   }
 }
-
 # terraform {
 #   backend "s3" {
 #     bucket         = "dev-blueops-jurist-tf-state"
