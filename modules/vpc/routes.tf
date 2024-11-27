@@ -21,7 +21,6 @@ resource "aws_route" "public_internet_gateway" {
 resource "aws_route_table" "private" {
   count  = var.common_tags["environment"] == "production" ? length(var.availability_zones) : var.nat_number
   vpc_id = aws_vpc.main.id
-
   tags = merge(var.common_tags, {
     Name = format("%s-%s-%s-private-route-table-${count.index + 1}-${element(var.availability_zones, count.index)}", var.common_tags["environment"], var.common_tags["project"], var.common_tags["owner"])
     },

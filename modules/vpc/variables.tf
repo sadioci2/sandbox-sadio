@@ -17,3 +17,7 @@ variable "common_tags" {
 variable "nat_number" {
   type    = number
 }
+
+variable "newbit" {
+  type    = number
+}

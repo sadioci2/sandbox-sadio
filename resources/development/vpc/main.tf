@@ -7,25 +7,26 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 5.44.0"
     }
   }
 }
 
-# terraform {
-#   backend "s3" {
-#     bucket         = "dev-blueops-jurist-tf-state"
-#     key            = "VPC/terraform.tfstate"
-#     region         = "us-east-2"
-#     dynamodb_table = "dev-blueops-jurist-tf-state-lock"
-#     encrypt        = true
-#   }
-# }
+terraform {
+  backend "s3" {
+    bucket         = "dev-blueops-jurist-tf-state"
+    key            = "VPC/terraform.tfstate"
+    region         = "us-east-2"
+    dynamodb_table = "dev-blueops-jurist-tf-state-lock"
+    encrypt        = true
+  }
+}
 
 locals {
-  region       = "us-east-2"
-  cidr_block   = "10.10.0.0/16"
-  nat_number   = 1
+  region     = "us-east-2"
+  cidr_block = "10.10.0.0/16"
+  newbit     = 4
+  nat_number = 1
   availability_zones = [
     "us-east-2a",
     "us-east-2b",
@@ -46,6 +47,7 @@ locals {
 module "vpc" {
   source             = "../../../modules/vpc"
   cidr_block         = local.cidr_block
+  newbit             = local.newbit
   region             = local.region
   availability_zones = local.availability_zones
   nat_number         = local.nat_number
