@@ -1,7 +1,3 @@
-provider "aws" {
-  region = local.region
-}
-
 terraform {
   required_version = ">= 1.0.0"
   required_providers {
@@ -15,7 +11,7 @@ terraform {
 # terraform {
 #   backend "s3" {
 #     bucket         = "dev-blueops-jurist-tf-state"
-#     key            = "VPC/terraform.tfstate"
+#     key            = "jump-server/terraform.tfstate"
 #     region         = "us-east-2"
 #     dynamodb_table = "dev-blueops-jurist-tf-state-lock"
 #     encrypt        = true
@@ -23,17 +19,12 @@ terraform {
 # }
 
 locals {
-  region     = "us-east-2"
-  cidr_block = "10.10.0.0/16"
-  newbit     = 4
-  nat_number = 1
-  availability_zones = [
-    "us-east-2a",
-    "us-east-2b",
-    "us-east-2c"
-  ]
-
-  common_tags = {
+aws_region   = "us-east-2"
+instance_type = "t2.micro"
+key_pair = "jurist"
+all_traffic = ["0.0.0.0/0"]
+controlled_traffic = ["10.10.0.0/16"]
+common_tags = {
     "id"             = "2024"
     "owner"          = "jurist"
     "environment"    = "dev"
@@ -44,12 +35,12 @@ locals {
   }
 }
 
-module "vpc" {
-  source             = "../../../modules/vpc"
-  cidr_block         = local.cidr_block
-  newbit             = local.newbit
-  region             = local.region
-  availability_zones = local.availability_zones
-  nat_number         = local.nat_number
-  common_tags        = local.common_tags
+module "jump-server" {
+source             = "../../../modules/jump-server"
+aws_region   = local.aws_region
+instance_type = local.instance_type
+key_pair = local.key_pair
+all_traffic= local.all_traffic
+controlled_traffic = local.controlled_traffic
+common_tags        = local.common_tags
 }

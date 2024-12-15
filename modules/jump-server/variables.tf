@@ -4,8 +4,11 @@ variable "aws_region" {
 variable "instance_type" {
   type    = string
 }
-variable "bastion" {
-  type    = number
+variable "all_traffic" {
+  type    = list(string)
+}
+variable "controlled_traffic" {
+  type    = list(string)
 }
 variable "key_pair" {
   type    = string
@@ -13,3 +16,4 @@ variable "key_pair" {
 variable "common_tags" {
   type = map(any)
 }
+

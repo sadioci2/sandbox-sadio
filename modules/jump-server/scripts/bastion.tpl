@@ -1,12 +1,18 @@
-#!/bin/bash
+# #!/bin/bash
+# private_ip = ${private_ip}
+# sudo -u ubuntu bash <<EOF
+# cat <<KEYFILE > /home/ubuntu/key.pem
+# ${private_key}
+# KEYFILE
+# chmod 400 /home/ubuntu/key.pem
+# EOF
+# sudo apt-get update -y
+# sudo apt-get install -y nginx
+# echo "server {
+#       listen 80;
+#       location / {
+#         proxy_pass http://${private_ip}:80;
+#       }
+#     }" | sudo tee /etc/nginx/sites-available/default
 
-# Install necessary tools
-sudo apt update
-sudo apt install -y sshpass
-
-# Add the private key for SSH
-echo "${key_pair_content}" > /home/ubuntu/bastion_key.pem
-chmod 400 /home/ubuntu/bastion_key.pem
-
-# Add the private instance's IP to known hosts
-ssh-keyscan -H ${private_ip} >> ~/.ssh/known_hosts
+# sudo systemctl reload nginx

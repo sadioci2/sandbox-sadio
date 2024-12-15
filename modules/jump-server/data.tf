@@ -18,28 +18,45 @@ data "aws_ami" "ubuntu" {
 # name = "jurist-group"
 # }
 
-# data "template_file" "public_data" {
-#     template= templatefile("${path.module}/scripts/connection.sh", {
-#     BASTION_IP = aws_instance.servers[0].public_ip
-#     PRIVATE_IP = aws_instance.servers[1].private_ip
-#     SSH_KEY_PATH = "~/Downloads/jurist.pem"
-#   })
-# }
+data "template_file" "bastion_script" {
+  template = file("${path.module}/scripts/bastion.sh")
 
-# data "template_file" "private_data" {
-#   template = file("${path.module}/scripts/privateec2.sh")
+  vars = {
+    private_key = base64decode(jsondecode(data.aws_secretsmanager_secret_version.key.secret_string).key)
+    private_ip = aws_instance.private_instance.private_ip
+  }
+}
 
-#   vars = {
-#     BASTION_IP   = aws_instance.servers[0].public_ip
-#     PRIVATE_IP   = aws_instance.servers[1].private_ip
-#     SSH_KEY_NAME = "authorized_keys"
-#     SSH_KEY_PATH = "/home/ubuntu/.ssh/authorized_keys"
-#   }
-# }
 data "aws_secretsmanager_secret" "key" {
   name = "key-pair"
 }
 
 data "aws_secretsmanager_secret_version" "key" {
   secret_id = data.aws_secretsmanager_secret.key.id
+}
+
+data "aws_subnet" "public" {
+  filter {
+    name   = "tag:Name"
+    values = ["dev-blueops-jurist-public-subnet-1-us-east-2a"]
+  }
+}
+
+data "aws_subnet" "private" {
+  filter {
+    name   = "tag:Name"
+    values = ["dev-blueops-jurist-private-subnet-1-us-east-2a"]
+  }
+}
+
+data "aws_vpc" "vpc" {
+  filter {
+    name   = "is-default"
+    values = ["false"]
+  }
+
+  filter {
+    name   = "tag:environment"
+    values = ["dev"]
+  }
 }
