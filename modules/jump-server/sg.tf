@@ -58,13 +58,15 @@ resource "aws_security_group" "private_instance_sg" {
     from_port       = 22
     to_port         = 22
     protocol        = "tcp"
-    security_groups = [aws_security_group.bastion_sg.id]
+    #security_groups = var.all_traffic
+    cidr_blocks = var.all_traffic
   }
   ingress {
     from_port         = 80
     to_port           = 80
     protocol          = "tcp"
-    security_groups   = [aws_security_group.bastion_sg.id]
+    #security_groups = var.all_traffic
+    cidr_blocks = var.all_traffic
   }
   egress {
     from_port   = 0
