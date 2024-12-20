@@ -1,14 +1,8 @@
 {
-  "Rosine": "HR",
-  "Yusuff": "Corporate",
-  "Sadio": "HR",
-  "Valerie": "IT",
-  "Deicole": "IT",
-  "Michael.A": "Network",
-  "Djafarou": "CEG",
-  "Paul": "CEG",
-  "Maryam": "Corporate",
-  "Djafarou.S": "HR",
-  "Michael": "IT",
-  "Paul.V": "Network"
+  "Rosine": "Devops",
+  "Yusuff": "Engineering",
+  "Sadio": "Devops",
+  "Valerie": "Engineering",
+  "Deicole": "Corporate",
+  "Maryam": "Corporate"
 }

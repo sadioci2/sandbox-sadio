@@ -11,7 +11,7 @@ terraform {
 # terraform {
 #   backend "s3" {
 #     bucket         = "dev-blueops-jurist-tf-state"
-#     key            = "secret-manager/terraform.tfstate"
+#     key            = "sm-retrieval/terraform.tfstate"
 #     region         = "us-east-2"
 #     dynamodb_table = "dev-blueops-jurist-tf-state-lock"
 #     encrypt        = true
@@ -19,8 +19,9 @@ terraform {
 # }
 
 locals {
-aws_region = "us-east-2"
-secret_names = ["db","jenkins","sonarqube","datadog"]
+aws_region_source = "us-east-2"
+aws_region_destination = "us-east-1"
+secret_names = ["db","jenkins", "sonarqube","datadog"]
 rotation_rule = 90
 default_rotation ="arn:aws:lambda:us-east-2:713881795316:function:aws-secretsmanager-rds-mysql-rotation"
 recovery = 0
@@ -32,12 +33,13 @@ common_tags = {
 "create_by"      = "Terraform"
 "cloud_provider" = "aws"
 "company"        = "DEL"
-} 
+  }
 }
 
 module "secret-manager" {
-source             = "../../../modules/secret-manager"
-aws_region   = local.aws_region
+source             = "../../../modules/sm-retrieval"
+aws_region_source   = local.aws_region_source
+aws_region_destination = local.aws_region_destination
 secret_names = local.secret_names
 recovery = local.recovery
 rotation_rule = local.rotation_rule

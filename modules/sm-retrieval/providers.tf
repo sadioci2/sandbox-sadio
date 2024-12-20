@@ -1,0 +1,20 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.44.0"
+    }
+  }
+}
+
+provider "aws" {
+  alias  = "source"
+  region = var.aws_region_source
+}
+
+provider "aws" {
+  alias  = "destination"
+  region = var.aws_region_destination
+}
+
+

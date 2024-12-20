@@ -9,42 +9,28 @@ terraform {
   }
 }
 
-terraform {
-  backend "s3" {
-    bucket         = "dev-blueops-jurist-tf-state"
-    key            = "IAM/terraform.tfstate"
-    region         = "us-east-2"
-    dynamodb_table = "dev-blueops-jurist-tf-state-lock"
-    encrypt        = true
-  }
-}
+# terraform {
+#   backend "s3" {
+#     bucket         = "dev-blueops-jurist-tf-state"
+#     key            = "IAM/terraform.tfstate"
+#     region         = "us-east-2"
+#     dynamodb_table = "dev-blueops-jurist-tf-state-lock"
+#     encrypt        = true
+#   }
+# }
 
 locals {
   aws_region = "us-east-2"
   dept =  jsondecode(file("${path.module}/../../../modules/iam/scripts/users.json"))
   dept_policies =  {  
-  HR = [
-      "arn:aws:iam::aws:policy/AmazonS3FullAccess",
-      "arn:aws:iam::aws:policy/IAMReadOnlyAccess",
-      "arn:aws:iam::aws:policy/AmazonEC2FullAccess",
-      "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  Devops = [
+    "arn:aws:iam::713881795316:policy/DevOpsSecretsPolicy"
     ]
-    IT = [
-      "arn:aws:iam::aws:policy/AdministratorAccess"
+  Engineering = [
+     "arn:aws:iam::713881795316:policy/EngineeringSecretsPolicy"
     ]
     Corporate = [
       "arn:aws:iam::aws:policy/AdministratorAccess"
-    ]
-    CEG = [
-      "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
-      "arn:aws:iam::aws:policy/AdministratorAccess-AWSElasticBeanstalk",
-      "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
-    ]
-    Network = [
-      "arn:aws:iam::aws:policy/AmazonVPCFullAccess",
-      "arn:aws:iam::aws:policy/AmazonEC2FullAccess",
-      "arn:aws:iam::aws:policy/AmazonS3FullAccess",
-      "arn:aws:iam::aws:policy/IAMFullAccess"
     ]
   }
 
