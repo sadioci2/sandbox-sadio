@@ -18,22 +18,22 @@ data "aws_ami" "ubuntu" {
 # name = "jurist-group"
 # }
 
-data "template_file" "bastion_script" {
-  template = file("${path.module}/scripts/bastion.sh")
+# data "template_file" "bastion_script" {
+#   template = file("${path.module}/scripts/bastion.sh")
 
-  vars = {
-    private_key = base64decode(jsondecode(data.aws_secretsmanager_secret_version.key.secret_string).key)
-    private_ip = aws_instance.private_instance.private_ip
-  }
-}
+#   vars = {
+#     private_key = base64decode(jsondecode(data.aws_secretsmanager_secret_version.key.secret_string).key)
+#     private_ip = aws_instance.private_instance.private_ip
+#   }
+# }
 
-data "aws_secretsmanager_secret" "key" {
-  name = "key-pair"
-}
+# data "aws_secretsmanager_secret" "key" {
+#   name = "key-pair"
+# }
 
-data "aws_secretsmanager_secret_version" "key" {
-  secret_id = data.aws_secretsmanager_secret.key.id
-}
+# data "aws_secretsmanager_secret_version" "key" {
+#   secret_id = data.aws_secretsmanager_secret.key.id
+# }
 
 data "aws_subnet" "public" {
   filter {

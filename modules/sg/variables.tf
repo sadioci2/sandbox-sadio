@@ -7,7 +7,7 @@ variable "aws_region" {
   type = string
 }
 
-variable "anywhere_ip" {
+variable "ip" {
   type    = list(string)
 }
 variable "specific_ip" {

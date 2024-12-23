@@ -2,6 +2,7 @@ resource "aws_secretsmanager_secret" "secrets" {
   for_each                = toset(var.secret_names)
   recovery_window_in_days = var.recovery
   name                    = each.key
+  description = "Api key for ${each.key}"
   
   tags = merge(var.common_tags, {
     Name = each.key
