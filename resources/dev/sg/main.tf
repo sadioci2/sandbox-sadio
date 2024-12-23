@@ -20,32 +20,32 @@ terraform {
 # }
 
 locals {
-aws_region = "us-east-2"
-ingress_ports= [
-  22,
-  80,
-]
-anywhere_ip = [ "0.0.0.0/0" ]
-specific_ip = [ "10.10.0.0/16" ]
- protocol_type = "tcp"
-common_tags = {
+  aws_region = "us-east-2"
+  ingress_ports = [
+    22,
+    80,
+  ]
+  ip            = ["0.0.0.0/0"]
+  specific_ip   = ["10.10.0.0/16"]
+  protocol_type = "tcp"
+  common_tags = {
     "id"             = "2024"
     "owner"          = "jurist"
     "environment"    = "dev"
     "project"        = "blueops"
     "create_by"      = "Terraform"
     "cloud_provider" = "aws"
-    "company" = "DEL"
+    "company"        = "DEL"
   }
 }
 
 module "sg" {
-  source      = "../../../modules/sg"
-  aws_region  = local.aws_region
+  source        = "../../../modules/sg"
+  aws_region    = local.aws_region
   ingress_ports = local.ingress_ports
   protocol_type = local.protocol_type
-  anywhere_ip = local.anywhere_ip
-  specific_ip = local.specific_ip
-  common_tags = local.common_tags
-  
+  ip            = local.ip
+  specific_ip   = local.specific_ip
+  common_tags   = local.common_tags
+
 }

@@ -19,13 +19,13 @@ terraform {
 # }
 
 locals {
-aws_region   = "us-east-2"
-instance_type = "t2.micro"
-key_pair = "jurist"
-key_path ="~/Downloads/jurist.pem"
-all_traffic = ["0.0.0.0/0"]
-controlled_traffic = ["10.10.0.0/16"]
-common_tags = {
+  aws_region         = "us-east-2"
+  instance_type      = "t2.micro"
+  key_pair           = "jurist"
+  key_path           = "~/Downloads/jurist.pem"
+  all_traffic        = ["0.0.0.0/0"]
+  controlled_traffic = ["10.10.0.0/16"]
+  common_tags = {
     "id"             = "2024"
     "owner"          = "jurist"
     "environment"    = "dev"
@@ -37,12 +37,12 @@ common_tags = {
 }
 
 module "jump-server" {
-source             = "../../../modules/jump-server"
-aws_region   = local.aws_region
-instance_type = local.instance_type
-key_pair = local.key_pair
-key_path = local.key_path
-all_traffic= local.all_traffic
-controlled_traffic = local.controlled_traffic
-common_tags        = local.common_tags
+  source             = "../../../modules/jump-server"
+  aws_region         = local.aws_region
+  instance_type      = local.instance_type
+  key_pair           = local.key_pair
+  key_path           = local.key_path
+  all_traffic        = local.all_traffic
+  controlled_traffic = local.controlled_traffic
+  common_tags        = local.common_tags
 }
