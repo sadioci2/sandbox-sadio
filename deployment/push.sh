@@ -10,7 +10,7 @@ push_to_github() {
     for i in "${!dirs[@]}"; do
         echo "$((i+1))) ${dirs[i]}"
     done
-    echo "Enter the numbers of the folders you want to select (e.g., 1 3 5):"
+    echo "Enter the numbers of the folders you want to push (e.g., 1 3 5):"
     read -r selected_indices
     selected_folders=()
     for index in $selected_indices; do
