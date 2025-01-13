@@ -15,5 +15,5 @@ data "aws_ami" "ubuntu" {
 }
 
 data "aws_security_group" "existing_sg" {
-name = "jurist-group"
+name = "default"
 }

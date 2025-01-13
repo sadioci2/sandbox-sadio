@@ -1,27 +1,66 @@
 variable "aws_region" {
   type    = string
 }
-
+variable "ingress_ports" {
+  type        = list(number)
+}
+variable "ip" {
+  type    = list(string)
+}
+variable "specific_ip" {
+  type    = list(string)
+}
+variable "protocol_type" {
+  type = string
+}
 variable "common_tags" {
   type = map(any)
 }
 
-variable "vpc_id" {
-  default = "vpc-09b5295b81445c391" # Replace with your VPC ID
+variable "rules_type" {
+type = string
+}
+variable "domain_name" {
+type = string
+}
+variable "protocol" {
+type        = string
+}
+variable "lb_type" {
+type = string
+}
+variable "is_it_internal" {
+type = bool
+}
+variable "delete_lb_protection" {
+type = bool
+}
+variable "public_subnets" {
+type = list(string)
 }
 
-variable "public-subnets" {
-  default = [
-    "subnet-0e4ff5c0f31072e14",
-    "subnet-0bfce654d77874bd9",
-    "subnet-08d007967f4d56e21"
-  ] # Replace with your subnet IDs
+variable "private_subnets" {
+type = list(string)
 }
-
-variable "private-subnets" {
-  default = [
-    "subnet-00a1adcfb112d531b",
-    "subnet-0eb52dd53a295dae0",
-    "subnet-0bcaf06d55686a47a"
-  ] # Replace with your subnet IDs
+variable "target_groups" {
+  type = list(object({
+    name                = string
+    port                = number
+    protocol            = string
+    target_type         = string
+    health_check_path   = string
+    health_check_port   = number
+    health_check_interval = number
+    health_check_timeout  = number
+    healthy_threshold   = number
+    unhealthy_threshold = number
+  }))
+}
+variable "rules" {
+type = list(object({
+priority        = number
+host_header     = string
+target_group_arn = string
+protocol = string
+  }))
 }
