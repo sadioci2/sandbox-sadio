@@ -24,14 +24,15 @@ locals {
   dept =  jsondecode(file("${path.module}/../../../modules/iam/scripts/users.json"))
   dept_policies =  {  
   Devops = [
-    "arn:aws:iam::713881795316:policy/DevOpsSecretsPolicy"
+    "arn:aws:iam::494597675232:policy/DevOpsSecretsPolicy"
     ]
   Engineering = [
-     "arn:aws:iam::713881795316:policy/EngineeringSecretsPolicy"
+     "arn:aws:iam::494597675232:policy/EngineeringSecretsPolicy"
     ]
     Corporate = [
       "arn:aws:iam::aws:policy/AdministratorAccess"
     ]
+
   }
 
   common_tags = {

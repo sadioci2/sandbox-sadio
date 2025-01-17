@@ -11,7 +11,7 @@ terraform {
 # terraform {
 #   backend "s3" {
 #     bucket         = "dev-jurist-demo-project-tf-state"
-#     key            = "AWSAuthConfig/terraform.tfstate"
+#     key            = "acm/terraform.tfstate"
 #     region         = "us-east-2"
 #     dynamodb_table = "dev-jurist-demo-project-tf-state-lock"
 #     encrypt        = true
@@ -19,11 +19,10 @@ terraform {
 # }
 
 locals {
-  aws_region         = "us-east-2"
-  control_plane_name = "dev-jurist-blueops-control-plane"
-  role_arn = "arn:aws:iam::713881795316:role/dev-jurist-blueops-nodegroup-role"
-  user_arn =  "arn:aws:iam::713881795316:root"
-  username = "root"
+  aws_region      = "us-east-2"
+  domain_name     = "thejurist.org.uk"
+  wildcard_domain = "*.thejurist.org.uk"
+  ttl             = 60
   common_tags = {
     "id"             = "2024"
     "owner"          = "jurist"
@@ -35,12 +34,11 @@ locals {
   }
 }
 
-module "aws-auth-config" {
-  source             = "../../../modules/auth-config"
-  aws_region         = local.aws_region
-  user_arn           = local.user_arn
-  username           = local.username
-  role_arn           = local.role_arn
-  control_plane_name = local.control_plane_name
-  common_tags        = local.common_tags
+module "acm" {
+  source          = "../../../modules/acm"
+  aws_region      = local.aws_region
+  domain_name     = local.domain_name
+  wildcard_domain = local.wildcard_domain
+  ttl             = 60
+  common_tags     = local.common_tags
 }
