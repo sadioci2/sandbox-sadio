@@ -16,7 +16,8 @@ resource "aws_launch_template" "jenkins_lt" {
   }
 
   network_interfaces {
-    security_groups = [aws_security_group.jenkins_sg.id]
+    # security_groups = [aws_security_group.jenkins_sg.id]
+    security_groups = [data.aws_security_group.sg.id]
     subnet_id       = element(var.private_subnets, 0)
      associate_public_ip_address = false
   }

@@ -29,6 +29,9 @@ data "aws_acm_certificate" "domain_cert" {
     most_recent = true
     statuses   = ["ISSUED"]
 }
+data "aws_security_group" "sg" {
+ name = "jurist"
+}
 
 # data "aws_security_group" "alb_sg" {
 #   filter {

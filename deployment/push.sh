@@ -39,7 +39,7 @@ push_to_github() {
         return 1
     }
 
-    echo "Changes from the selected folders have been pushed to GitHub successfully!"
+    echo "Changes from the "$folder" have been pushed to GitHub successfully!"
 }
 
 push_to_github

@@ -8,7 +8,8 @@ resource "aws_security_group" "jenkins_sg" {
       from_port   = ingress.value
       to_port     = ingress.value
       protocol    = var.protocol_type
-      security_groups  = [data.aws_security_group.alb_sg.id]
+     # security_groups  = [data.aws_security_group.alb_sg.id]
+    security_groups  = [data.aws_security_group.sg.id]
     }
   }
 

@@ -23,10 +23,12 @@ data "aws_route53_zone" "route53_zone" {
   private_zone = false
 }
 
-data "aws_security_group" "alb_sg" {
- name = "dev-jurist-blueops-albsg"
+# data "aws_security_group" "alb_sg" {
+#  name = "dev-jurist-blueops-albsg"
+# }
+data "aws_security_group" "sg" {
+ name = "jurist"
 }
-
 data "aws_lb_target_group" "jenkins_target_group" {
   name = "jenkins-tg"
 }
