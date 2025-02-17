@@ -1,5 +1,4 @@
-# cleanup_script.sh
-
+#!/bin/bash
 cleanup_terraform() {
     # Get the root directory of the repository
     REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)

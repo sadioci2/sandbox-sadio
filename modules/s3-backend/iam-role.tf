@@ -1,5 +1,4 @@
 resource "aws_iam_role" "replication" {
-  provider = aws.source
   name     = format("%s-%s-%s-s3-replication-role", var.common_tags["environment"], var.common_tags["project"], var.common_tags["owner"])
 
   assume_role_policy = jsonencode({
@@ -20,7 +19,6 @@ resource "aws_iam_role" "replication" {
 }
 
 resource "aws_iam_policy" "replication" {
-  provider = aws.source
   name     = format("%s-%s-%s-s3-replication-policy", var.common_tags["environment"], var.common_tags["project"], var.common_tags["owner"])
 
   policy = jsonencode({
@@ -50,7 +48,6 @@ resource "aws_iam_policy" "replication" {
 }
 
 resource "aws_iam_policy_attachment" "replication" {
-  provider   = aws.source
   name       = format("%s-%s-%s-s3-replication-policy-attachment", var.common_tags["environment"], var.common_tags["project"], var.common_tags["owner"])
   roles      = [aws_iam_role.replication.name]
   policy_arn = aws_iam_policy.replication.arn

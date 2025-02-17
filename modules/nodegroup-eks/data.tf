@@ -14,6 +14,6 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-data "aws_security_group" "existing_sg" {
-name = "default"
-}
+# data "aws_ssm_parameter" "ubuntu_ami" {
+#   name = "/aws/service/canonical/ubuntu/eks/20.04/stable/current/arm64/hvm/ebs-gp2/ami-id"
+# }

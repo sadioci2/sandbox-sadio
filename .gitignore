@@ -8,7 +8,7 @@ crash.*.log
 **/.terraform/*
 */**/.terraform
 *.tfvars
-
+*.env
 # Terragrunt files and directories
 */**/.terragrunt-cache/
 */**/.terraform.lock/

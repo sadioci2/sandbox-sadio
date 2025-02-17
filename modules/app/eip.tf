@@ -1,4 +1,4 @@
-# Create an Elastic IP
+# # Create an Elastic IP
 # resource "aws_eip" "my_eip" {
 
 #   instance = aws_instance.my_ec2.id

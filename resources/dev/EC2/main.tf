@@ -13,15 +13,15 @@ provider "aws" {
   region = local.aws_region
 }
 
-terraform {
-  backend "s3" {
-    bucket         = "dev-blueops-jurist-tf-state"
-    key            = "EC2/terraform.tfstate"
-    region         = "us-east-2"
-    dynamodb_table = "dev-blueops-jurist-tf-state-lock"
-    encrypt        = true
-  }
-}
+# terraform {
+#   backend "s3" {
+#     bucket         = "dev-blueops-jurist-tf-state"
+#     key            = "EC2/terraform.tfstate"
+#     region         = "us-east-2"
+#     dynamodb_table = "dev-blueops-jurist-tf-state-lock"
+#     encrypt        = true
+#   }
+# }
 
 locals {
   aws_region = "us-east-2"
